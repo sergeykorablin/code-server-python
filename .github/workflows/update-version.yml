@@ -20,6 +20,6 @@ jobs:
             git config --local user.name gitHub-actions
             git add Dockerfile
             git commit -m "Update code-server version to $VERSION"
-            git tag $VERSION
+            git tag v$VERSION
             git push origin main --tags
           fi
