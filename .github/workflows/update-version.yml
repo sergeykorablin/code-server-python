@@ -1,4 +1,4 @@
-name: Version update
+name: Check new upstream version
 on:
   schedule:
     - cron: "10 8 * * *"
@@ -10,6 +10,11 @@ jobs:
       - name: Update Dockerfile
         run: |
           VERSION=$(curl -s https://api.github.com/repos/linuxserver/docker-code-server/releases/latest | jq -r '.tag_name' | sed -E 's/([0-9]+\.[0-9]+\.[0-9]+)-.*/\1/')
+
+          if [[ -z "$VERSION" ]]; then
+            echo "VERSION is empty"
+            exit 0
+          fi
 
           if grep -q "FROM linuxserver/code-server:$VERSION" Dockerfile; then
             echo "Version $VERSION is already used in Dockerfile."
