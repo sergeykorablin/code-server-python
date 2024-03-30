@@ -19,10 +19,29 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build image
+        uses: docker/build-push-action@v5
+        with:
+          tags: |
+            ghcr.io/sergeykorablin/code-server-python:latest
+            ghcr.io/sergeykorablin/code-server-python:${{ steps.extract_tag.outputs.tag_without_v }}
+
+      - name: Run Trivy vulnerability scanner
+              uses: aquasecurity/trivy-action@master
+              continue-on-error: true
+              with:
+                image-ref: "ghcr.io/sergeykorablin/code-server-python:${{ steps.extract_tag.outputs.tag_without_v }}"
+                format: 'table'
+                exit-code: '1'
+                ignore-unfixed: true
+                vuln-type: 'os,library'
+                severity: 'CRITICAL,HIGH'
+
+      - name: Push image
         uses: docker/build-push-action@v5
         with:
           push: true
           tags: |
             ghcr.io/sergeykorablin/code-server-python:latest
             ghcr.io/sergeykorablin/code-server-python:${{ steps.extract_tag.outputs.tag_without_v }}
+                
