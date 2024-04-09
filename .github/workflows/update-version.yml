@@ -1,4 +1,4 @@
-name: Check new upstream version
+name: Sync version to upstream
 on:
   schedule:
     - cron: "10 8 * * *"
@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.MY_PAT }}
       - name: Update Dockerfile
         run: |
           VERSION=$(curl -s https://api.github.com/repos/linuxserver/docker-code-server/releases/latest | jq -r '.tag_name' | sed -E 's/([0-9]+\.[0-9]+\.[0-9]+)-.*/\1/')
