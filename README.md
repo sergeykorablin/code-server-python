@@ -21,13 +21,10 @@ kubectl -n code-server create secret generic code-secrets \
 kubectl apply -f code-server.yaml
 ```
 
-> [!WARNING]  
-> Don't forget to place Code Server behind a reverse proxy + TLS.
-
 ## Uninstall
 
 ```sh
-kubectl delete ns code-server
+kubectl delete -f code-server.yaml
 ```
 
 ![](https://github.com/sergeykorablin/code-server-python/actions/workflows/docker-image.yml/badge.svg)
