@@ -27,4 +27,4 @@ kubectl apply -f code-server.yaml
 kubectl delete -f code-server.yaml
 ```
 
-![](https://github.com/sergeykorablin/code-server-python/actions/workflows/docker-image.yml/badge.svg)
+[![Image build](https://github.com/sergeykorablin/code-server-python/actions/workflows/docker-image.yml/badge.svg?branch=)](https://github.com/sergeykorablin/code-server-python/actions/workflows/docker-image.yml)
