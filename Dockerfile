@@ -1,4 +1,4 @@
-FROM linuxserver/code-server:4.92.2
+FROM linuxserver/code-server:4.93.1
 
 RUN apt-get update && \
     apt-get install -y python3 python3-pip python3.10-venv && \
