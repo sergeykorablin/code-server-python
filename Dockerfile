@@ -1,7 +1,7 @@
 FROM linuxserver/code-server:4.93.1
 
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip python3.10-venv && \
+    apt-get install -y python3 python3-pip python3-venv && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     rm -rf /var/lib/apt/lists/*
 
